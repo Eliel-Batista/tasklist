@@ -1,5 +1,6 @@
 package com.example.TaskList.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Employee {
     private String position;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Task> tasks;
 
 

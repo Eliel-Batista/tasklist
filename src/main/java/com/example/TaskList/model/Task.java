@@ -1,5 +1,6 @@
 package com.example.TaskList.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
