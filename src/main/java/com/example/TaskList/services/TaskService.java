@@ -1,14 +1,17 @@
 package com.example.TaskList.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.TaskList.model.Employee;
 import com.example.TaskList.model.Task;
 import com.example.TaskList.repository.EmployeeRepository;
 import com.example.TaskList.repository.TaskRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class TaskService {
@@ -49,6 +52,14 @@ public class TaskService {
                 .orElseThrow(() -> new EntityNotFoundException("Funcionário não encontrado com ID: " + employeeId));
 
         task.setEmployee(employee);
+        taskRepository.save(task);
+    }
+
+    public void completedTask(Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada com ID: " + taskId));
+
+        task.setCompleted(true);
         taskRepository.save(task);
     }
 }
